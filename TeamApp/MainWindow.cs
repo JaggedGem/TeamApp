@@ -9,10 +9,13 @@ using System.Windows.Forms;
 
 namespace TeamApp
 {
-    public partial class Form1 : Form
+    public partial class MainWindow : Form
     {
-        public Form1()
+        private List<string> dataFiles;
+        public MainWindow(List<string> dataFiles)
         {
+            this.dataFiles = dataFiles;
+            
             InitializeComponent();
         }
     }

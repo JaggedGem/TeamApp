@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -15,7 +16,12 @@ namespace TeamApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            
+            LoadingDataWindow loadingWindow = new LoadingDataWindow();
+
+            Application.Run(loadingWindow);
+
+            Application.Run(new MainWindow(loadingWindow.DataFiles));
         }
     }
 }
