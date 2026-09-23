@@ -17,7 +17,7 @@ namespace TeamApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             
-            LoadingDataWindow loadingWindow = new LoadingDataWindow();
+            LoginWindow loadingWindow = new LoginWindow();
 
             Application.Run(loadingWindow);
 

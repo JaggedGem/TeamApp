@@ -5,14 +5,26 @@ using System.Windows.Forms;
 
 namespace TeamApp
 {
-    public partial class LoadingDataWindow : Form
+    public partial class LoginWindow : Form
     {
         public List<string> DataFiles { get; private set; } = new  List<string>();
 
-        public LoadingDataWindow()
+        public LoginWindow()
         {
-            InitializeComponent();
+            InitializeComponent();  
+        }
+
+        private bool checkCredentials(string  username, string password)
+        {
+            if (!File.Exists(@"./auth.meta"))
+            {
+                MessageBox.Show(@"Login Error", @"Error", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                
+                return false;
+            }
             
+            return true;
         }
 
         private void LoadData()
