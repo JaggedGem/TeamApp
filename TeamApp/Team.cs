@@ -1,9 +1,13 @@
-﻿using System.Collections.Generic;
-
-namespace TeamApp
+﻿namespace TeamApp
 {
     public class Team
     {
-        public List<Player> players = new List<Player>();
+        public string Name;
+        public List<Player> Players;
+
+        public Team(string name, List<Player> players) {
+            Name = name;
+            Players = players;
+        }
     }
 }

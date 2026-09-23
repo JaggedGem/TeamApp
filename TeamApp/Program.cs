@@ -1,9 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Windows.Forms;
-
 namespace TeamApp
 {
     static class Program
@@ -12,16 +6,29 @@ namespace TeamApp
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
-        {
+        static void Main() {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
-            LoginWindow loadingWindow = new LoginWindow();
 
-            Application.Run(loadingWindow);
+            List<Team> teams;
+            if (!File.Exists(@"./auth.meta")) {
+                SignupWindow signupWindow = new SignupWindow();
+                if (signupWindow.ShowDialog() != DialogResult.OK) {
+                    return;
+                }
 
-            Application.Run(new MainWindow(loadingWindow.DataFiles));
+                teams = new List<Team>();
+            }
+            else {
+                LoginWindow loginWindow = new LoginWindow();
+                if (loginWindow.ShowDialog() != DialogResult.OK) {
+                    return;
+                }
+
+                teams = loginWindow.Teams;
+            }
+
+            Application.Run(new MainWindow(teams));
         }
     }
 }
