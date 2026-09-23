@@ -2,7 +2,7 @@
 
 namespace TeamApp
 {
-    partial class LoadingDataWindow
+    partial class LoginWindow
     {
         /// <summary>
         /// Required designer variable.
@@ -42,14 +42,14 @@ namespace TeamApp
             this.loadingBar.TabIndex = 0;
             this.loadingBar.UseWaitCursor = true;
             // 
-            // LoadingDataWindow
+            // LoginWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(454, 212);
             this.Controls.Add(this.loadingBar);
-            this.Name = "LoadingDataWindow";
-            this.Text = "LoadingDataWindow";
+            this.Name = "LoginWindow";
+            this.Text = "LoginWindow";
             this.ResumeLayout(false);
         }
 
