@@ -10,6 +10,7 @@ namespace TeamApp
             InitializeComponent();
 
             PopulateTeams();
+            PopulatePlayers(teamSelect.SelectedIndex);
         }
 
         private void PopulateTeams() {
@@ -31,30 +32,41 @@ namespace TeamApp
         }
 
         private void PopulatePlayers(int selectedTeamIndex) {
+            playerList.Controls.Clear();
+
             List<Player> players = _teamRepository.Teams[selectedTeamIndex].Players;
 
             if (players.Count == 0) {
-                playerList.Controls.Clear();
                 playerList.Visible = false;
-
                 label2.Visible = true;
 
                 return;
             }
 
+            playerList.Visible = true;
+            label2.Visible = false;
+
             int buttonId = 0;
+
             foreach (Player player in players) {
                 Button button = new Button();
 
                 button.Anchor = AnchorStyles.None;
                 button.Location = new Point(3, 3);
                 button.Name = $"playerButton_{buttonId++}";
-                button.Size = new Size(playerList.ClientSize.Width - SystemInformation.VerticalScrollBarWidth, 25);
+                button.Size = new Size(
+                    playerList.ClientSize.Width - SystemInformation.VerticalScrollBarWidth,
+                    25
+                );
                 button.TabIndex = 0;
                 button.Text = player.Name;
                 button.UseVisualStyleBackColor = true;
-                button.Click += (object sender, EventArgs e) => { PopulatePlayerData(player); };
+                button.Click += (sender, e) => PopulatePlayerData(player);
+
+                playerList.Controls.Add(button);
             }
+
+            PopulatePlayerData(players[0]);
         }
 
         private void PopulatePlayerData(Player selectedPlayer) {
@@ -90,6 +102,25 @@ namespace TeamApp
             if (_teamRepository.Teams.Count == 1) {
                 teamSelect.SelectedIndex = 0;
             }
+        }
+
+        private void newPlayerButton_Click(object sender, EventArgs e) {
+            NewPlayerWindow newPlayerWindow = new NewPlayerWindow();
+
+            newPlayerWindow.ShowDialog();
+
+            if (newPlayerWindow.DialogResult != DialogResult.OK) {
+                return;
+            }
+
+            Team selectedTeam = _teamRepository.Teams[teamSelect.SelectedIndex];
+
+            _teamRepository.CreatePlayer(newPlayerWindow.NewPlayerName, newPlayerWindow.NewPlayerPosition,
+                newPlayerWindow.NewPlayerIdnp, newPlayerWindow.NewPlayerBirthday, selectedTeam,
+                player => {
+                    PopulatePlayers(teamSelect.SelectedIndex);
+                    PopulatePlayerData(player);
+                });
         }
     }
 }

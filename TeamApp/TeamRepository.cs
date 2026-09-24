@@ -23,14 +23,15 @@ public class TeamRepository
         using (BinaryWriter writer = new BinaryWriter(fs)) {
             (byte[] nonce, byte[] ciphertext, byte[] tag) =
                 SecureHandler.Encrypt(_masterKey, Encoding.UTF8.GetBytes(name));
-            writer.Write(nonce.Length);
             writer.Write(nonce);
 
             writer.Write(ciphertext.Length);
             writer.Write(ciphertext);
 
-            writer.Write(tag.Length);
             writer.Write(tag);
+
+            writer.Flush();
+            writer.Close();
         }
 
         Directory.CreateDirectory(Path.Combine(teamDirectory, "players"));
@@ -40,5 +41,44 @@ public class TeamRepository
         Teams.Add(newTeam);
 
         updateTeamSelection(newTeam);
+    }
+
+    public void CreatePlayer(string name, string position, string idnp, DateTime birthday, Team team,
+        Action<Player> updatePlayersList) {
+        Guid id = Guid.NewGuid();
+
+        string playersDirectory = Path.Combine("data", "teams", team.Id.ToString(), "players");
+
+        using (FileStream fs = new FileStream(Path.Combine(playersDirectory, id + ".player"), FileMode.Create,
+                   FileAccess.Write))
+        using (BinaryWriter writer = new BinaryWriter(fs)) {
+            using MemoryStream data = new MemoryStream();
+            using BinaryWriter dataWriter = new BinaryWriter(data);
+
+            dataWriter.Write(name);
+            dataWriter.Write(position);
+            dataWriter.Write(idnp);
+            dataWriter.Write(birthday.ToBinary());
+
+            dataWriter.Flush();
+            byte[] plaintext = data.ToArray();
+
+            (byte[] nonce, byte[] ciphertext, byte[] tag) = SecureHandler.Encrypt(_masterKey, plaintext);
+            writer.Write(nonce);
+
+            writer.Write(ciphertext.Length);
+            writer.Write(ciphertext);
+
+            writer.Write(tag);
+
+            writer.Flush();
+            writer.Close();
+        }
+
+        // Update in-memory list
+        Player newPlayer = new Player(name, position, idnp, birthday, id);
+        team.Players.Add(newPlayer);
+
+        updatePlayersList(newPlayer);
     }
 }

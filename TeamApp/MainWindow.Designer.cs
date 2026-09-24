@@ -198,6 +198,7 @@ namespace TeamApp
             newPlayerButton.TabIndex = 7;
             newPlayerButton.Text = "Jucator Nou";
             newPlayerButton.UseVisualStyleBackColor = true;
+            newPlayerButton.Click += newPlayerButton_Click;
             // 
             // MainWindow
             // 

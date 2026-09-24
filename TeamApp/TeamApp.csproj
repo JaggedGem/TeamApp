@@ -19,6 +19,9 @@
         <Compile Update="NewTeamWindow.cs">
             <SubType>Form</SubType>
         </Compile>
+        <Compile Update="NewPlayerWindow.cs">
+            <SubType>Form</SubType>
+        </Compile>
     </ItemGroup>
 
 </Project>

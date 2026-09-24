@@ -104,9 +104,9 @@ namespace TeamApp
                 using (FileStream fs = new FileStream(Path.Combine(dataFolder, "team.meta"), FileMode.Open,
                            FileAccess.Read))
                 using (BinaryReader reader = new BinaryReader(fs)) {
-                    byte[] nonce = reader.ReadBytes(reader.ReadInt32());
+                    byte[] nonce = reader.ReadBytes(12);
                     byte[] ciphertext = reader.ReadBytes(reader.ReadInt32());
-                    byte[] tag = reader.ReadBytes(reader.ReadInt32());
+                    byte[] tag = reader.ReadBytes(16);
 
                     name = Encoding.UTF8.GetString(
                         SecureHandler.Decrypt(masterKey, nonce, ciphertext, tag)
@@ -124,9 +124,9 @@ namespace TeamApp
                 foreach (string dataFile in Directory.GetFiles(Path.Combine(dataFolder, "players"), "*.player")) {
                     using (FileStream fs = new FileStream(dataFile, FileMode.Open, FileAccess.Read))
                     using (BinaryReader reader = new BinaryReader(fs)) {
-                        byte[] nonce = reader.ReadBytes(reader.ReadInt32());
+                        byte[] nonce = reader.ReadBytes(12);
                         byte[] ciphertext = reader.ReadBytes(reader.ReadInt32());
-                        byte[] tag = reader.ReadBytes(reader.ReadInt32());
+                        byte[] tag = reader.ReadBytes(16);
 
                         byte[] decryptedData = SecureHandler.Decrypt(
                             masterKey,
@@ -139,18 +139,17 @@ namespace TeamApp
                         using BinaryReader decryptedReader = new BinaryReader(ms);
 
                         string playerName = decryptedReader.ReadString();
-                        string playerRole = decryptedReader.ReadString();
-                        int idnp = decryptedReader.ReadInt32();
-                        int year = decryptedReader.ReadInt32();
-                        int month = decryptedReader.ReadInt32();
-                        int day = decryptedReader.ReadInt32();
+                        Console.WriteLine(playerName);
+                        string playerPosition = decryptedReader.ReadString();
+                        string idnp = decryptedReader.ReadString();
+                        DateTime birthDate = DateTime.FromBinary(decryptedReader.ReadInt64());
 
                         players.Add(
                             new Player(
                                 playerName,
-                                playerRole,
+                                playerPosition,
                                 idnp,
-                                new DateTime(year, month, day),
+                                birthDate,
                                 Guid.Parse(Path.GetFileNameWithoutExtension(dataFile))
                             )
                         );
