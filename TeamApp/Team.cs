@@ -4,10 +4,12 @@
     {
         public string Name;
         public List<Player> Players;
+        public Guid Id;
 
-        public Team(string name, List<Player> players) {
+        public Team(string name, List<Player> players, Guid id) {
             Name = name;
             Players = players;
+            Id = id;
         }
     }
 }

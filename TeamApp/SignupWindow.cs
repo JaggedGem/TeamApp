@@ -2,6 +2,8 @@
 {
     public partial class SignupWindow : Form
     {
+        public TeamRepository TeamRepository;
+
         public SignupWindow() {
             InitializeComponent();
         }
@@ -45,6 +47,7 @@
                 writer.Write(tag);
             }
 
+            TeamRepository = new TeamRepository(masterKey, new List<Team>());
             DialogResult = DialogResult.OK;
             Close();
         }

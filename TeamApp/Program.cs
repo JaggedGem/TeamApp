@@ -10,14 +10,14 @@ namespace TeamApp
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            List<Team> teams;
+            TeamRepository teamRepository;
             if (!File.Exists(@"./auth.meta")) {
                 SignupWindow signupWindow = new SignupWindow();
                 if (signupWindow.ShowDialog() != DialogResult.OK) {
                     return;
                 }
 
-                teams = new List<Team>();
+                teamRepository = signupWindow.TeamRepository;
             }
             else {
                 LoginWindow loginWindow = new LoginWindow();
@@ -25,10 +25,10 @@ namespace TeamApp
                     return;
                 }
 
-                teams = loginWindow.Teams;
+                teamRepository = loginWindow.TeamRepository;
             }
 
-            Application.Run(new MainWindow(teams));
+            Application.Run(new MainWindow(teamRepository));
         }
     }
 }

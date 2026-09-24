@@ -78,11 +78,13 @@ namespace TeamApp
             // 
             // label2
             // 
-            label2.Location = new System.Drawing.Point(121, 68);
+            label2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            label2.Location = new System.Drawing.Point(75, 83);
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(193, 23);
             label2.TabIndex = 4;
             label2.Text = "Nu exista jucatori in aceasta echipa";
+            label2.Visible = false;
             // 
             // playerList
             // 
@@ -205,11 +207,11 @@ namespace TeamApp
             ClientSize = new System.Drawing.Size(636, 333);
             Controls.Add(newPlayerButton);
             Controls.Add(playerDetails);
-            Controls.Add(playerList);
             Controls.Add(newTeamButton);
             Controls.Add(teamSelect);
             Controls.Add(label1);
             Controls.Add(label2);
+            Controls.Add(playerList);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             Text = "Team App";
             playerDetails.ResumeLayout(false);

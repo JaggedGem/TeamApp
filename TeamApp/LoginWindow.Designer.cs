@@ -92,6 +92,7 @@ namespace TeamApp
             // 
             // LoginWindow
             // 
+            AcceptButton = loginButton;
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(530, 245);
@@ -102,6 +103,8 @@ namespace TeamApp
             Controls.Add(usernameInput);
             Controls.Add(label1);
             Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Text = "Login";
             ResumeLayout(false);
             PerformLayout();
