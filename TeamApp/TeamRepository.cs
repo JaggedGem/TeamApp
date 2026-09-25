@@ -81,4 +81,45 @@ public class TeamRepository
 
         updatePlayersList(newPlayer);
     }
+
+    public void UpdatePlayer(Player oldPlayer, Team team, string name, string position, string idnp, DateTime birthday,
+        Action? updatePlayersList) {
+        string playersDirectory = Path.Combine("data", "teams", team.Id.ToString(), "players");
+
+        using (FileStream fs = new FileStream(Path.Combine(playersDirectory, oldPlayer.Id + ".player"),
+                   FileMode.Truncate, FileAccess.Write))
+        using (BinaryWriter writer = new BinaryWriter(fs)) {
+            using MemoryStream data = new MemoryStream();
+            using BinaryWriter dataWriter = new BinaryWriter(data);
+
+            dataWriter.Write(name);
+            dataWriter.Write(position);
+            dataWriter.Write(idnp);
+            dataWriter.Write(birthday.ToBinary());
+
+            dataWriter.Flush();
+            byte[] plaintext = data.ToArray();
+
+            (byte[] nonce, byte[] ciphertext, byte[] tag) = SecureHandler.Encrypt(_masterKey, plaintext);
+            writer.Write(nonce);
+
+            writer.Write(ciphertext.Length);
+            writer.Write(ciphertext);
+
+            writer.Write(tag);
+
+            writer.Flush();
+            writer.Close();
+        }
+
+        // Update in-memory list
+        oldPlayer.Name = name;
+        oldPlayer.Position = position;
+        oldPlayer.Idnp = idnp;
+        oldPlayer.Birthday = birthday;
+
+        if (updatePlayersList != null) {
+            updatePlayersList();
+        }
+    }
 }

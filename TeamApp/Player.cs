@@ -2,16 +2,17 @@
 {
     public class Player
     {
-        public string Name, Position;
-        public string Idnp;
-        public DateTime BirthDate;
-        public Guid Id;
+        public Guid Id { get; }
+        public string Name { get; set; }
+        public string Position { get; set; }
+        public string Idnp { get; set; }
+        public DateTime Birthday { get; set; }
 
-        public Player(string name, string position, string idnp, DateTime birthDate, Guid id) {
+        public Player(string name, string position, string idnp, DateTime birthday, Guid id) {
             Name = name;
             Position = position;
             Idnp = idnp;
-            BirthDate = birthDate;
+            Birthday = birthday;
             Id = id;
         }
     }

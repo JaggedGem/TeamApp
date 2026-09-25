@@ -3,6 +3,7 @@ namespace TeamApp
     public partial class MainWindow : Form
     {
         private readonly TeamRepository _teamRepository;
+        private Player? _selectedPlayer;
 
         public MainWindow(TeamRepository teamRepository) {
             _teamRepository = teamRepository;
@@ -40,11 +41,30 @@ namespace TeamApp
                 playerList.Visible = false;
                 label2.Visible = true;
 
+                playerNameInput.Enabled = false;
+                positionInput.Enabled = false;
+                idnpInput.Enabled = false;
+                birthdayInput.Enabled = false;
+
+                savePlayerDataButton.Enabled = false;
+
+                playerNameInput.Text = "";
+                positionInput.Text = "";
+                idnpInput.Text = "";
+                birthdayInput.Value = DateTime.Today;
+
                 return;
             }
 
             playerList.Visible = true;
             label2.Visible = false;
+
+            playerNameInput.Enabled = true;
+            positionInput.Enabled = true;
+            idnpInput.Enabled = true;
+            birthdayInput.Enabled = true;
+
+            savePlayerDataButton.Enabled = true;
 
             int buttonId = 0;
 
@@ -61,7 +81,11 @@ namespace TeamApp
                 button.TabIndex = 0;
                 button.Text = player.Name;
                 button.UseVisualStyleBackColor = true;
-                button.Click += (sender, e) => PopulatePlayerData(player);
+                button.Click += (sender, e) => {
+                    PopulatePlayerData(player);
+
+                    _selectedPlayer = player;
+                };
 
                 playerList.Controls.Add(button);
             }
@@ -72,8 +96,8 @@ namespace TeamApp
         private void PopulatePlayerData(Player selectedPlayer) {
             playerNameInput.Text = selectedPlayer.Name;
             positionInput.Text = selectedPlayer.Position;
-            idnpInput.Text = selectedPlayer.Idnp.ToString();
-            birthdayInput.Value = selectedPlayer.BirthDate;
+            idnpInput.Text = selectedPlayer.Idnp;
+            birthdayInput.Value = selectedPlayer.Birthday;
         }
 
         private void teamSelect_SelectedIndexChanged(object sender, EventArgs e) {
@@ -121,6 +145,42 @@ namespace TeamApp
                     PopulatePlayers(teamSelect.SelectedIndex);
                     PopulatePlayerData(player);
                 });
+        }
+
+        private void savePlayerDataButton_Click(object sender, EventArgs e) {
+            if (_selectedPlayer == null) {
+                return;
+            }
+
+            string name = playerNameInput.Text.Trim();
+            string position = positionInput.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(name)) {
+                MessageBox.Show("Introdu numele jucătorului.");
+                playerNameInput.Focus();
+
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(position)) {
+                MessageBox.Show("Introdu poziția jucătorului.");
+                positionInput.Focus();
+
+                return;
+            }
+
+            if (idnpInput.Text.Length != 13 || !idnpInput.Text.All(char.IsDigit)) {
+                MessageBox.Show("IDNP-ul trebuie să conțină exact 13 cifre.");
+                idnpInput.Focus();
+
+                return;
+            }
+
+            bool skipPlayerListRerender = playerNameInput.Text == _selectedPlayer.Name;
+
+            _teamRepository.UpdatePlayer(_selectedPlayer, _teamRepository.Teams[teamSelect.SelectedIndex],
+                playerNameInput.Text, positionInput.Text, idnpInput.Text, birthdayInput.Value,
+                skipPlayerListRerender ? null : () => { PopulatePlayers(teamSelect.SelectedIndex); });
         }
     }
 }

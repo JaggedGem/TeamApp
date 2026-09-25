@@ -44,6 +44,7 @@ namespace TeamApp
             label4 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             newPlayerButton = new System.Windows.Forms.Button();
+            dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             playerDetails.SuspendLayout();
             SuspendLayout();
             // 
@@ -98,6 +99,7 @@ namespace TeamApp
             // 
             // playerDetails
             // 
+            playerDetails.Controls.Add(dateTimePicker1);
             playerDetails.Controls.Add(savePlayerDataButton);
             playerDetails.Controls.Add(birthdayInput);
             playerDetails.Controls.Add(idnpInput);
@@ -120,8 +122,9 @@ namespace TeamApp
             savePlayerDataButton.Name = "savePlayerDataButton";
             savePlayerDataButton.Size = new System.Drawing.Size(75, 23);
             savePlayerDataButton.TabIndex = 8;
-            savePlayerDataButton.Text = "Save";
+            savePlayerDataButton.Text = "Salveaza";
             savePlayerDataButton.UseVisualStyleBackColor = true;
+            savePlayerDataButton.Click += savePlayerDataButton_Click;
             // 
             // birthdayInput
             // 
@@ -136,6 +139,7 @@ namespace TeamApp
             // idnpInput
             // 
             idnpInput.Location = new System.Drawing.Point(112, 100);
+            idnpInput.MaxLength = 13;
             idnpInput.Name = "idnpInput";
             idnpInput.Size = new System.Drawing.Size(163, 23);
             idnpInput.TabIndex = 6;
@@ -200,6 +204,16 @@ namespace TeamApp
             newPlayerButton.UseVisualStyleBackColor = true;
             newPlayerButton.Click += newPlayerButton_Click;
             // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.CustomFormat = "dd.MM.yyyy";
+            dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            dateTimePicker1.Location = new System.Drawing.Point(59, 96);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new System.Drawing.Size(163, 23);
+            dateTimePicker1.TabIndex = 9;
+            dateTimePicker1.Value = new System.DateTime(2026, 9, 24, 16, 31, 38, 921);
+            // 
             // MainWindow
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -219,6 +233,8 @@ namespace TeamApp
             playerDetails.PerformLayout();
             ResumeLayout(false);
         }
+
+        private System.Windows.Forms.DateTimePicker dateTimePicker1;
 
         private System.Windows.Forms.Button savePlayerDataButton;
 
