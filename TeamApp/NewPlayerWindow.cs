@@ -1,6 +1,5 @@
 ﻿namespace TeamApp;
 
-// todo: fix validation
 public partial class NewPlayerWindow : Form
 {
     public string NewPlayerName;

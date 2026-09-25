@@ -139,7 +139,6 @@ namespace TeamApp
                         using BinaryReader decryptedReader = new BinaryReader(ms);
 
                         string playerName = decryptedReader.ReadString();
-                        Console.WriteLine(playerName);
                         string playerPosition = decryptedReader.ReadString();
                         string idnp = decryptedReader.ReadString();
                         DateTime birthDate = DateTime.FromBinary(decryptedReader.ReadInt64());

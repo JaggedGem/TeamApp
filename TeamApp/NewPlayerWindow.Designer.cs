@@ -78,7 +78,6 @@ partial class NewPlayerWindow
         // 
         // addPlayerButton
         // 
-        addPlayerButton.DialogResult = System.Windows.Forms.DialogResult.OK;
         addPlayerButton.Location = new System.Drawing.Point(248, 270);
         addPlayerButton.Name = "addPlayerButton";
         addPlayerButton.Size = new System.Drawing.Size(75, 23);
@@ -102,7 +101,7 @@ partial class NewPlayerWindow
         // 
         nameInput.Location = new System.Drawing.Point(12, 35);
         nameInput.Name = "nameInput";
-        nameInput.Size = new System.Drawing.Size(292, 23);
+        nameInput.Size = new System.Drawing.Size(311, 23);
         nameInput.TabIndex = 6;
         nameInput.WordWrap = false;
         // 
@@ -110,7 +109,7 @@ partial class NewPlayerWindow
         // 
         positionInput.Location = new System.Drawing.Point(12, 96);
         positionInput.Name = "positionInput";
-        positionInput.Size = new System.Drawing.Size(292, 23);
+        positionInput.Size = new System.Drawing.Size(311, 23);
         positionInput.TabIndex = 7;
         positionInput.WordWrap = false;
         // 
@@ -119,7 +118,7 @@ partial class NewPlayerWindow
         idnpInput.Location = new System.Drawing.Point(12, 154);
         idnpInput.MaxLength = 13;
         idnpInput.Name = "idnpInput";
-        idnpInput.Size = new System.Drawing.Size(292, 23);
+        idnpInput.Size = new System.Drawing.Size(311, 23);
         idnpInput.TabIndex = 8;
         idnpInput.WordWrap = false;
         // 
@@ -129,9 +128,9 @@ partial class NewPlayerWindow
         birthdayInput.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
         birthdayInput.Location = new System.Drawing.Point(12, 216);
         birthdayInput.Name = "birthdayInput";
-        birthdayInput.Size = new System.Drawing.Size(292, 23);
+        birthdayInput.Size = new System.Drawing.Size(311, 23);
         birthdayInput.TabIndex = 7;
-        birthdayInput.Value = new System.DateTime(2026, 9, 24, 22, 55, 31, 237);
+        birthdayInput.MaxDate = DateTime.Today;
         // 
         // NewPlayerWindow
         // 
