@@ -134,4 +134,22 @@ public class TeamRepository
 
         Teams.Remove(teamToBeDeleted);
     }
+
+    public void DeletePlayer(Guid teamId, Guid playerId) {
+        Team? team = Teams.Find(team => { return team.Id == teamId; });
+
+        if (team == null) {
+            return;
+        }
+
+        Player? player = team.Players.Find(player => { return player.Id == playerId; });
+
+        if (player == null) {
+            return;
+        }
+
+        File.Delete(Path.Combine("data", "teams", teamId.ToString(), playerId.ToString()));
+
+        team.Players.Remove(player);
+    }
 }

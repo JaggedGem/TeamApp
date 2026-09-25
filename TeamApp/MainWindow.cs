@@ -198,5 +198,24 @@ namespace TeamApp
 
             PopulateTeams();
         }
+
+        private void deletePlayerButton_Click(object sender, EventArgs e) {
+            if (_selectedPlayer == null) {
+                return;
+            }
+
+            var confirmDialog =
+                MessageBox.Show(
+                    $"Sunteti siguri ca doriti sa stergeti jucatorul \"{_selectedPlayer.Name}\"?\nActiunea nu poate fi reversata!",
+                    "Sigur?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (confirmDialog != DialogResult.OK) {
+                return;
+            }
+
+            _teamRepository.DeletePlayer(_teamRepository.Teams[teamSelect.SelectedIndex].Id, _selectedPlayer.Id);
+
+            PopulatePlayers(teamSelect.SelectedIndex);
+        }
     }
 }

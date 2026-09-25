@@ -45,6 +45,7 @@ namespace TeamApp
             label3 = new System.Windows.Forms.Label();
             newPlayerButton = new System.Windows.Forms.Button();
             deleteTeamButton = new System.Windows.Forms.Button();
+            deletePlayerButton = new System.Windows.Forms.Button();
             playerDetails.SuspendLayout();
             SuspendLayout();
             // 
@@ -99,6 +100,7 @@ namespace TeamApp
             // 
             // playerDetails
             // 
+            playerDetails.Controls.Add(deletePlayerButton);
             playerDetails.Controls.Add(savePlayerDataButton);
             playerDetails.Controls.Add(birthdayInput);
             playerDetails.Controls.Add(idnpInput);
@@ -213,6 +215,16 @@ namespace TeamApp
             deleteTeamButton.UseVisualStyleBackColor = true;
             deleteTeamButton.Click += deleteTeamButton_Click;
             // 
+            // deletePlayerButton
+            // 
+            deletePlayerButton.Location = new System.Drawing.Point(85, 185);
+            deletePlayerButton.Name = "deletePlayerButton";
+            deletePlayerButton.Size = new System.Drawing.Size(109, 23);
+            deletePlayerButton.TabIndex = 9;
+            deletePlayerButton.Text = "Sterge Jucatorul";
+            deletePlayerButton.UseVisualStyleBackColor = true;
+            deletePlayerButton.Click += deletePlayerButton_Click;
+            // 
             // MainWindow
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -233,6 +245,8 @@ namespace TeamApp
             playerDetails.PerformLayout();
             ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Button deletePlayerButton;
 
         private System.Windows.Forms.Button deleteTeamButton;
 
