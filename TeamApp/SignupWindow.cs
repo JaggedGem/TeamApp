@@ -2,14 +2,14 @@
 {
     public partial class SignupWindow : Form
     {
-        public TeamRepository TeamRepository;
+        public TeamRepository TeamRepository = null!;
 
         public SignupWindow() {
             InitializeComponent();
         }
 
         private void signupButton_Click(object sender, EventArgs e) {
-            string username = usernameInput.Text;
+            string username = usernameInput.Text.Trim();
             string password = passwordInput.Text;
 
             if (username == "" || password == "") {

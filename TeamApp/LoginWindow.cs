@@ -13,7 +13,7 @@ namespace TeamApp
         private byte[]? _cachedTag;
 
         private readonly List<Team> _teams = new();
-        public TeamRepository TeamRepository;
+        public TeamRepository TeamRepository = null!;
 
         public LoginWindow() {
             InitializeComponent();
@@ -54,7 +54,7 @@ namespace TeamApp
             }
         }
 
-        private bool checkCredentials(string username, string password) {
+        private bool CheckCredentials(string username, string password) {
             if (username == _cachedUsername && SecureHandler.VerifyPassword(password, _cachedPasswordHash ?? "")) {
                 return true;
             }
@@ -168,11 +168,11 @@ namespace TeamApp
         }
 
         private async void loginButton_Click(object sender, EventArgs e) {
-            string username = usernameInput.Text;
+            string username = usernameInput.Text.Trim();
             string password = passwordInput.Text;
 
             byte[] masterKey;
-            if (checkCredentials(username, password)) {
+            if (CheckCredentials(username, password)) {
                 masterKey = SecureHandler.Decrypt(SecureHandler.GenerateEncryptionKey(password, _cachedEncryptionSalt),
                     _cachedNonce, _cachedEncryptedMasterKey, _cachedTag);
             }
@@ -182,13 +182,13 @@ namespace TeamApp
                 return;
             }
 
-            dataProgressbar.Visible = true;
+            dataProgressBar.Visible = true;
 
-            var progress = new Progress<int>(value => { dataProgressbar.Value = value; });
+            var progress = new Progress<int>(value => { dataProgressBar.Value = value; });
 
             await Task.Run(() => LoadData(masterKey, progress));
 
-            dataProgressbar.Value = 100;
+            dataProgressBar.Value = 100;
 
             TeamRepository = new TeamRepository(masterKey, _teams);
 

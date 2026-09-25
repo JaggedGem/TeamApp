@@ -4,7 +4,7 @@ namespace TeamApp;
 
 public class TeamRepository
 {
-    private byte[] _masterKey;
+    private readonly byte[] _masterKey;
     public readonly List<Team> Teams;
 
     public TeamRepository(byte[] masterKey, List<Team> teams) {
@@ -148,7 +148,7 @@ public class TeamRepository
             return;
         }
 
-        File.Delete(Path.Combine("data", "teams", teamId.ToString(), playerId.ToString()));
+        File.Delete(Path.Combine("data", "teams", teamId.ToString(), "players", playerId + ".player"));
 
         team.Players.Remove(player);
     }

@@ -58,7 +58,7 @@ partial class NewTeamWindow
         cancelButton.Name = "cancelButton";
         cancelButton.Size = new System.Drawing.Size(75, 23);
         cancelButton.TabIndex = 2;
-        cancelButton.Text = "Anuleaza";
+        cancelButton.Text = "Anulează";
         cancelButton.UseVisualStyleBackColor = true;
         cancelButton.Click += cancelButton_Click;
         // 
@@ -68,7 +68,7 @@ partial class NewTeamWindow
         addTeamButton.Name = "addTeamButton";
         addTeamButton.Size = new System.Drawing.Size(75, 23);
         addTeamButton.TabIndex = 3;
-        addTeamButton.Text = "Adauga";
+        addTeamButton.Text = "Adaugă";
         addTeamButton.UseVisualStyleBackColor = true;
         addTeamButton.Click += addTeamButton_Click;
         // 
@@ -87,7 +87,7 @@ partial class NewTeamWindow
         MaximizeBox = false;
         MinimizeBox = false;
         StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-        Text = "Adauga Echipa";
+        Text = "Adaugă echipă";
         ResumeLayout(false);
         PerformLayout();
     }

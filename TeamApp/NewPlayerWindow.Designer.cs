@@ -74,7 +74,7 @@ partial class NewPlayerWindow
         label4.Name = "label4";
         label4.Size = new System.Drawing.Size(100, 23);
         label4.TabIndex = 3;
-        label4.Text = "Data Nasterii";
+        label4.Text = "Data nașterii";
         // 
         // addPlayerButton
         // 
@@ -82,7 +82,7 @@ partial class NewPlayerWindow
         addPlayerButton.Name = "addPlayerButton";
         addPlayerButton.Size = new System.Drawing.Size(75, 23);
         addPlayerButton.TabIndex = 4;
-        addPlayerButton.Text = "Adauga";
+        addPlayerButton.Text = "Adaugă";
         addPlayerButton.UseVisualStyleBackColor = true;
         addPlayerButton.Click += addPlayerButton_Click;
         // 
@@ -94,7 +94,7 @@ partial class NewPlayerWindow
         cancelButton.Name = "cancelButton";
         cancelButton.Size = new System.Drawing.Size(75, 23);
         cancelButton.TabIndex = 5;
-        cancelButton.Text = "Anuleaza";
+        cancelButton.Text = "Anulează";
         cancelButton.UseVisualStyleBackColor = true;
         // 
         // nameInput
@@ -153,7 +153,7 @@ partial class NewPlayerWindow
         MaximizeBox = false;
         MinimizeBox = false;
         StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-        Text = "Adauga Jucator";
+        Text = "Adaugă jucător";
         ResumeLayout(false);
         PerformLayout();
     }

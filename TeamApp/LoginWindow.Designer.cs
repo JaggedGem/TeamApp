@@ -35,7 +35,7 @@ namespace TeamApp
             passwordInput = new System.Windows.Forms.TextBox();
             label2 = new System.Windows.Forms.Label();
             loginButton = new System.Windows.Forms.Button();
-            dataProgressbar = new System.Windows.Forms.ProgressBar();
+            dataProgressBar = new System.Windows.Forms.ProgressBar();
             SuspendLayout();
             // 
             // label1
@@ -81,14 +81,14 @@ namespace TeamApp
             loginButton.UseVisualStyleBackColor = true;
             loginButton.Click += loginButton_Click;
             // 
-            // dataProgressbar
+            // dataProgressBar
             // 
-            dataProgressbar.Cursor = System.Windows.Forms.Cursors.WaitCursor;
-            dataProgressbar.Location = new System.Drawing.Point(12, 180);
-            dataProgressbar.Name = "dataProgressbar";
-            dataProgressbar.Size = new System.Drawing.Size(506, 28);
-            dataProgressbar.TabIndex = 5;
-            dataProgressbar.Visible = false;
+            dataProgressBar.Cursor = System.Windows.Forms.Cursors.WaitCursor;
+            dataProgressBar.Location = new System.Drawing.Point(12, 180);
+            dataProgressBar.Name = "dataProgressBar";
+            dataProgressBar.Size = new System.Drawing.Size(506, 28);
+            dataProgressBar.TabIndex = 5;
+            dataProgressBar.Visible = false;
             // 
             // LoginWindow
             // 
@@ -96,7 +96,7 @@ namespace TeamApp
             AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             ClientSize = new System.Drawing.Size(530, 245);
-            Controls.Add(dataProgressbar);
+            Controls.Add(dataProgressBar);
             Controls.Add(loginButton);
             Controls.Add(passwordInput);
             Controls.Add(label2);
@@ -110,7 +110,7 @@ namespace TeamApp
             PerformLayout();
         }
 
-        private System.Windows.Forms.ProgressBar dataProgressbar;
+        private System.Windows.Forms.ProgressBar dataProgressBar;
 
         private System.Windows.Forms.Button loginButton;
 

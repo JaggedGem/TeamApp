@@ -2,9 +2,9 @@
 
 public partial class NewPlayerWindow : Form
 {
-    public string NewPlayerName;
-    public string NewPlayerPosition;
-    public string NewPlayerIdnp;
+    public string NewPlayerName = string.Empty;
+    public string NewPlayerPosition = string.Empty;
+    public string NewPlayerIdnp = string.Empty;
     public DateTime NewPlayerBirthday;
 
     public NewPlayerWindow() {

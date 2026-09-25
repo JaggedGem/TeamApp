@@ -85,13 +85,14 @@ namespace TeamApp
             label2.Name = "label2";
             label2.Size = new System.Drawing.Size(193, 23);
             label2.TabIndex = 4;
-            label2.Text = "Nu exista jucatori in aceasta echipa";
+            label2.Text = "Nu există jucători în această echipă";
             label2.Visible = false;
             // 
             // playerList
             // 
             playerList.AutoScroll = true;
             playerList.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            playerList.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
             playerList.Location = new System.Drawing.Point(104, 68);
             playerList.Name = "playerList";
             playerList.Size = new System.Drawing.Size(230, 214);
@@ -110,12 +111,13 @@ namespace TeamApp
             playerDetails.Controls.Add(label5);
             playerDetails.Controls.Add(label4);
             playerDetails.Controls.Add(label3);
+            playerDetails.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             playerDetails.Location = new System.Drawing.Point(340, 68);
             playerDetails.Name = "playerDetails";
             playerDetails.Size = new System.Drawing.Size(281, 214);
             playerDetails.TabIndex = 6;
             playerDetails.TabStop = false;
-            playerDetails.Text = "Detalii Jucator";
+            playerDetails.Text = "Detalii jucător";
             // 
             // savePlayerDataButton
             // 
@@ -135,7 +137,8 @@ namespace TeamApp
             birthdayInput.Name = "birthdayInput";
             birthdayInput.Size = new System.Drawing.Size(163, 23);
             birthdayInput.TabIndex = 7;
-            birthdayInput.Value = new System.DateTime(2026, 9, 24, 16, 31, 38, 921);
+            birthdayInput.MaxDate = System.DateTime.Today;
+            birthdayInput.Value = System.DateTime.Today;
             // 
             // idnpInput
             // 
@@ -165,7 +168,7 @@ namespace TeamApp
             label6.Name = "label6";
             label6.Size = new System.Drawing.Size(100, 23);
             label6.TabIndex = 3;
-            label6.Text = "Data Nasterii";
+            label6.Text = "Data nașterii";
             label6.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label5
@@ -183,7 +186,7 @@ namespace TeamApp
             label4.Name = "label4";
             label4.Size = new System.Drawing.Size(100, 23);
             label4.TabIndex = 1;
-            label4.Text = "Post";
+            label4.Text = "Poziție";
             label4.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // label3
@@ -201,7 +204,7 @@ namespace TeamApp
             newPlayerButton.Name = "newPlayerButton";
             newPlayerButton.Size = new System.Drawing.Size(85, 23);
             newPlayerButton.TabIndex = 7;
-            newPlayerButton.Text = "Jucator Nou";
+            newPlayerButton.Text = "Jucător nou";
             newPlayerButton.UseVisualStyleBackColor = true;
             newPlayerButton.Click += newPlayerButton_Click;
             // 
@@ -211,7 +214,7 @@ namespace TeamApp
             deleteTeamButton.Name = "deleteTeamButton";
             deleteTeamButton.Size = new System.Drawing.Size(106, 23);
             deleteTeamButton.TabIndex = 8;
-            deleteTeamButton.Text = "Sterge Echipa";
+            deleteTeamButton.Text = "Șterge echipa";
             deleteTeamButton.UseVisualStyleBackColor = true;
             deleteTeamButton.Click += deleteTeamButton_Click;
             // 
@@ -221,7 +224,7 @@ namespace TeamApp
             deletePlayerButton.Name = "deletePlayerButton";
             deletePlayerButton.Size = new System.Drawing.Size(109, 23);
             deletePlayerButton.TabIndex = 9;
-            deletePlayerButton.Text = "Sterge Jucatorul";
+            deletePlayerButton.Text = "Șterge jucătorul";
             deletePlayerButton.UseVisualStyleBackColor = true;
             deletePlayerButton.Click += deletePlayerButton_Click;
             // 

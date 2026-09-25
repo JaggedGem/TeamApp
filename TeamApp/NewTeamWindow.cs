@@ -2,7 +2,7 @@
 
 public partial class NewTeamWindow : Form
 {
-    public string NewTeamName;
+    public string NewTeamName = string.Empty;
 
     public NewTeamWindow() {
         InitializeComponent();
@@ -14,7 +14,15 @@ public partial class NewTeamWindow : Form
     }
 
     private void addTeamButton_Click(object sender, EventArgs e) {
-        NewTeamName = newTeamName.Text;
+        string name = newTeamName.Text.Trim();
+        if (string.IsNullOrWhiteSpace(name)) {
+            MessageBox.Show("Introdu numele echipei.", "Eroare", MessageBoxButtons.OK,
+                MessageBoxIcon.Error);
+            newTeamName.Focus();
+            return;
+        }
+
+        NewTeamName = name;
 
         DialogResult = DialogResult.OK;
         Close();

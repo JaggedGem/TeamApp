@@ -18,9 +18,11 @@ namespace TeamApp
             teamSelect.Items.Clear();
 
             if (_teamRepository.Teams.Count == 0) {
-                teamSelect.Items.Add("Adauga prima echipa...");
+                teamSelect.Items.Add("Adaugă prima echipă...");
                 teamSelect.SelectedIndex = 0;
                 teamSelect.Enabled = false;
+                deleteTeamButton.Enabled = false;
+                newPlayerButton.Enabled = false;
 
                 return;
             }
@@ -30,23 +32,31 @@ namespace TeamApp
             }
 
             teamSelect.SelectedIndex = 0;
+            teamSelect.Enabled = true;
+            deleteTeamButton.Enabled = true;
+            newPlayerButton.Enabled = true;
         }
 
         private void PopulatePlayers(int selectedTeamIndex) {
             playerList.Controls.Clear();
+            _selectedPlayer = null;
+
+            if (selectedTeamIndex < 0 || selectedTeamIndex >= _teamRepository.Teams.Count) {
+                playerList.Visible = false;
+                label2.Visible = true;
+                label2.Text = "Nu există echipe. Adaugă prima echipă.";
+                SetPlayerEditingEnabled(false);
+                return;
+            }
 
             List<Player> players = _teamRepository.Teams[selectedTeamIndex].Players;
 
             if (players.Count == 0) {
                 playerList.Visible = false;
                 label2.Visible = true;
+                label2.Text = "Nu există jucători în această echipă";
 
-                playerNameInput.Enabled = false;
-                positionInput.Enabled = false;
-                idnpInput.Enabled = false;
-                birthdayInput.Enabled = false;
-
-                savePlayerDataButton.Enabled = false;
+                SetPlayerEditingEnabled(false);
 
                 playerNameInput.Text = "";
                 positionInput.Text = "";
@@ -58,13 +68,7 @@ namespace TeamApp
 
             playerList.Visible = true;
             label2.Visible = false;
-
-            playerNameInput.Enabled = true;
-            positionInput.Enabled = true;
-            idnpInput.Enabled = true;
-            birthdayInput.Enabled = true;
-
-            savePlayerDataButton.Enabled = true;
+            SetPlayerEditingEnabled(true);
 
             int buttonId = 0;
 
@@ -94,6 +98,7 @@ namespace TeamApp
         }
 
         private void PopulatePlayerData(Player selectedPlayer) {
+            _selectedPlayer = selectedPlayer;
             playerNameInput.Text = selectedPlayer.Name;
             positionInput.Text = selectedPlayer.Position;
             idnpInput.Text = selectedPlayer.Idnp;
@@ -110,7 +115,7 @@ namespace TeamApp
         private void newTeamButton_Click(object sender, EventArgs e) {
             NewTeamWindow window = new NewTeamWindow();
 
-            window.ShowDialog();
+            window.ShowDialog(this);
 
             if (window.DialogResult != DialogResult.OK) {
                 return;
@@ -129,9 +134,13 @@ namespace TeamApp
         }
 
         private void newPlayerButton_Click(object sender, EventArgs e) {
+            if (teamSelect.SelectedIndex < 0 || teamSelect.SelectedIndex >= _teamRepository.Teams.Count) {
+                return;
+            }
+
             NewPlayerWindow newPlayerWindow = new NewPlayerWindow();
 
-            newPlayerWindow.ShowDialog();
+            newPlayerWindow.ShowDialog(this);
 
             if (newPlayerWindow.DialogResult != DialogResult.OK) {
                 return;
@@ -176,14 +185,18 @@ namespace TeamApp
                 return;
             }
 
-            bool skipPlayerListRerender = playerNameInput.Text == _selectedPlayer.Name;
+            bool skipPlayerListRerender = name == _selectedPlayer.Name;
 
             _teamRepository.UpdatePlayer(_selectedPlayer, _teamRepository.Teams[teamSelect.SelectedIndex],
-                playerNameInput.Text, positionInput.Text, idnpInput.Text, birthdayInput.Value,
+                name, position, idnpInput.Text, birthdayInput.Value,
                 skipPlayerListRerender ? null : () => { PopulatePlayers(teamSelect.SelectedIndex); });
         }
 
         private void deleteTeamButton_Click(object sender, EventArgs e) {
+            if (teamSelect.SelectedIndex < 0 || teamSelect.SelectedIndex >= _teamRepository.Teams.Count) {
+                return;
+            }
+
             Team teamToDelete = _teamRepository.Teams[teamSelect.SelectedIndex];
             var confirmDialog =
                 MessageBox.Show(
@@ -197,6 +210,7 @@ namespace TeamApp
             _teamRepository.DeleteTeam(teamToDelete.Id);
 
             PopulateTeams();
+            PopulatePlayers(teamSelect.SelectedIndex);
         }
 
         private void deletePlayerButton_Click(object sender, EventArgs e) {
@@ -216,6 +230,15 @@ namespace TeamApp
             _teamRepository.DeletePlayer(_teamRepository.Teams[teamSelect.SelectedIndex].Id, _selectedPlayer.Id);
 
             PopulatePlayers(teamSelect.SelectedIndex);
+        }
+
+        private void SetPlayerEditingEnabled(bool enabled) {
+            playerNameInput.Enabled = enabled;
+            positionInput.Enabled = enabled;
+            idnpInput.Enabled = enabled;
+            birthdayInput.Enabled = enabled;
+            savePlayerDataButton.Enabled = enabled;
+            deletePlayerButton.Enabled = enabled;
         }
     }
 }
