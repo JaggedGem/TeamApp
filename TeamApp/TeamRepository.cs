@@ -122,4 +122,16 @@ public class TeamRepository
             updatePlayersList();
         }
     }
+
+    public void DeleteTeam(Guid teamId) {
+        Team? teamToBeDeleted = Teams.Find(team => { return team.Id == teamId; });
+
+        if (teamToBeDeleted == null) {
+            return;
+        }
+
+        Directory.Delete(Path.Combine("data", "teams", teamId.ToString()), true);
+
+        Teams.Remove(teamToBeDeleted);
+    }
 }

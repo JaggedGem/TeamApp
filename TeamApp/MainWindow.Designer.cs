@@ -44,7 +44,7 @@ namespace TeamApp
             label4 = new System.Windows.Forms.Label();
             label3 = new System.Windows.Forms.Label();
             newPlayerButton = new System.Windows.Forms.Button();
-            dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            deleteTeamButton = new System.Windows.Forms.Button();
             playerDetails.SuspendLayout();
             SuspendLayout();
             // 
@@ -99,7 +99,6 @@ namespace TeamApp
             // 
             // playerDetails
             // 
-            playerDetails.Controls.Add(dateTimePicker1);
             playerDetails.Controls.Add(savePlayerDataButton);
             playerDetails.Controls.Add(birthdayInput);
             playerDetails.Controls.Add(idnpInput);
@@ -204,15 +203,15 @@ namespace TeamApp
             newPlayerButton.UseVisualStyleBackColor = true;
             newPlayerButton.Click += newPlayerButton_Click;
             // 
-            // dateTimePicker1
+            // deleteTeamButton
             // 
-            dateTimePicker1.CustomFormat = "dd.MM.yyyy";
-            dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            dateTimePicker1.Location = new System.Drawing.Point(59, 96);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new System.Drawing.Size(163, 23);
-            dateTimePicker1.TabIndex = 9;
-            dateTimePicker1.Value = new System.DateTime(2026, 9, 24, 16, 31, 38, 921);
+            deleteTeamButton.Location = new System.Drawing.Point(340, 26);
+            deleteTeamButton.Name = "deleteTeamButton";
+            deleteTeamButton.Size = new System.Drawing.Size(106, 23);
+            deleteTeamButton.TabIndex = 8;
+            deleteTeamButton.Text = "Sterge Echipa";
+            deleteTeamButton.UseVisualStyleBackColor = true;
+            deleteTeamButton.Click += deleteTeamButton_Click;
             // 
             // MainWindow
             // 
@@ -220,6 +219,7 @@ namespace TeamApp
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             AutoScroll = true;
             ClientSize = new System.Drawing.Size(636, 333);
+            Controls.Add(deleteTeamButton);
             Controls.Add(newPlayerButton);
             Controls.Add(playerDetails);
             Controls.Add(newTeamButton);
@@ -234,7 +234,7 @@ namespace TeamApp
             ResumeLayout(false);
         }
 
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.Button deleteTeamButton;
 
         private System.Windows.Forms.Button savePlayerDataButton;
 

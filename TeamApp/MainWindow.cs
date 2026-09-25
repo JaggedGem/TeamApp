@@ -182,5 +182,21 @@ namespace TeamApp
                 playerNameInput.Text, positionInput.Text, idnpInput.Text, birthdayInput.Value,
                 skipPlayerListRerender ? null : () => { PopulatePlayers(teamSelect.SelectedIndex); });
         }
+
+        private void deleteTeamButton_Click(object sender, EventArgs e) {
+            Team teamToDelete = _teamRepository.Teams[teamSelect.SelectedIndex];
+            var confirmDialog =
+                MessageBox.Show(
+                    $"Sunteti siguri ca doriti sa stergeti echipa \"{teamToDelete.Name}\"?\nActiunea nu poate fi reversata!",
+                    "Sigur?", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (confirmDialog != DialogResult.OK) {
+                return;
+            }
+
+            _teamRepository.DeleteTeam(teamToDelete.Id);
+
+            PopulateTeams();
+        }
     }
 }
